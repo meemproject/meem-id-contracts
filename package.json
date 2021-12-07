@@ -1,7 +1,7 @@
 {
 	"name": "@meemproject/meem-id-contracts",
 	"private": true,
-	"version": "1.0.-",
+	"version": "1.0.0",
 	"description": "Meem Ids",
 	"author": "Meem Project",
 	"homepage": "https://meem.wtf",
