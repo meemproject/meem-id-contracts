@@ -14,6 +14,11 @@ contract AccessControlFacet {
 		return s.ADMIN_ROLE;
 	}
 
+	function ID_VERIFIER_ROLE() public view returns (bytes32) {
+		LibAppStorage.AppStorage storage s = LibAppStorage.diamondStorage();
+		return s.ID_VERIFIER_ROLE;
+	}
+
 	/// @notice Grant a role to a user. The granting user must have the ADMIN_ROLE
 	/// @param user The wallet address of the user to grant the role to
 	/// @param role The role to grant

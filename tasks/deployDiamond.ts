@@ -46,7 +46,7 @@ export async function deployDiamond(options: {
 	console.log('Account balance:', (await contractOwner.getBalance()).toString())
 
 	// deploy Diamond
-	const Diamond = await ethers.getContractFactory('MeemDiamond')
+	const Diamond = await ethers.getContractFactory('MeemIdDiamond')
 
 	const diamond = await Diamond.deploy()
 

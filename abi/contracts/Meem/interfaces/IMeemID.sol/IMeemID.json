@@ -1,26 +1,5 @@
 [
   {
-    "inputs": [],
-    "name": "MeemIDAlreadyAssociated",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "MeemIDNotFound",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "requiredRole",
-        "type": "bytes32"
-      }
-    ],
-    "name": "MissingRequiredRole",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",

@@ -5,6 +5,14 @@ error MissingRequiredRole(bytes32 requiredRole);
 
 error NoRenounceOthers();
 
+error TwitterAlreadyAdded();
+
+error MeemIDNotFound();
+
+error MeemIDAlreadyExists();
+
+error MeemIDAlreadyAssociated();
+
 // error NotTokenOwner(uint256 tokenId);
 
 // error InvalidNonOwnerSplitAllocationAmount(

@@ -43,47 +43,51 @@ describe('Contract Admin', function Test() {
 			adminRole
 		)
 		assert.isTrue(hasAdminRole)
-		const minterRole = await accessControlFacet.MINTER_ROLE()
+		const idVerifierRole = await accessControlFacet.ID_VERIFIER_ROLE()
 		const hasMinterRole = await accessControlFacet.hasRole(
 			signers[0].address,
-			minterRole
+			idVerifierRole
 		)
 		assert.isTrue(hasMinterRole)
 	})
 
 	it('Can grant role as admin', async () => {
-		const minterRole = await accessControlFacet.MINTER_ROLE()
-		await accessControlFacet.connect(signers[0]).grantRole(someUser, minterRole)
+		const idVerifierRole = await accessControlFacet.ID_VERIFIER_ROLE()
+		await accessControlFacet
+			.connect(signers[0])
+			.grantRole(someUser, idVerifierRole)
 
 		const hasRole = await accessControlFacet
 			.connect(signers[0])
-			.hasRole(someUser, minterRole)
+			.hasRole(someUser, idVerifierRole)
 		assert.isTrue(hasRole)
 	})
 
 	it('Can revoke role as admin', async () => {
-		const minterRole = await accessControlFacet.MINTER_ROLE()
+		const idVerifierRole = await accessControlFacet.ID_VERIFIER_ROLE()
 		await accessControlFacet
 			.connect(signers[0])
-			.revokeRole(someUser, minterRole)
+			.revokeRole(someUser, idVerifierRole)
 
 		const hasRole = await accessControlFacet
 			.connect(signers[0])
-			.hasRole(someUser, minterRole)
+			.hasRole(someUser, idVerifierRole)
 		assert.isFalse(hasRole)
 	})
 
 	it('Can not grant role as non-admin', async () => {
-		const minterRole = await accessControlFacet.MINTER_ROLE()
+		const idVerifierRole = await accessControlFacet.ID_VERIFIER_ROLE()
 		await assert.isRejected(
-			accessControlFacet.connect(signers[1]).grantRole(someUser, minterRole)
+			accessControlFacet.connect(signers[1]).grantRole(someUser, idVerifierRole)
 		)
 	})
 
 	it('Can not revoke role as non-admin', async () => {
-		const minterRole = await accessControlFacet.MINTER_ROLE()
+		const idVerifierRole = await accessControlFacet.ID_VERIFIER_ROLE()
 		await assert.isRejected(
-			accessControlFacet.connect(signers[1]).revokeRole(someUser, minterRole)
+			accessControlFacet
+				.connect(signers[1])
+				.revokeRole(someUser, idVerifierRole)
 		)
 	})
 })
