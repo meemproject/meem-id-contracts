@@ -7,6 +7,15 @@ pragma solidity ^0.8.4;
  * @dev String operations.
  */
 library LibStrings {
+	function compareStrings(string memory s1, string memory s2)
+		internal
+		pure
+		returns (bool)
+	{
+		return
+			keccak256(abi.encodePacked(s1)) == keccak256(abi.encodePacked(s2));
+	}
+
 	/**
 	 * @dev Converts a `uint256` to its ASCII `string` representation.
 	 */

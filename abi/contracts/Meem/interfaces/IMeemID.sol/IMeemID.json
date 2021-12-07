@@ -20,12 +20,43 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "twitterHandle",
+        "type": "string"
+      }
+    ],
+    "name": "getMeemIDByTwitterHandle",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address[]",
+            "name": "wallets",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "twitters",
+            "type": "string[]"
+          }
+        ],
+        "internalType": "struct MeemID",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "addy",
         "type": "address"
       }
     ],
-    "name": "getMeemID",
+    "name": "getMeemIDByWalletAddress",
     "outputs": [
       {
         "components": [
@@ -52,31 +83,72 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "twitterHandle",
+        "name": "lookupTwitterHandle",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "twitterHandleToRemove",
         "type": "string"
       }
     ],
-    "name": "getMeemID",
-    "outputs": [
+    "name": "removeTwitterHandleByTwitterHandle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
-        "components": [
-          {
-            "internalType": "address[]",
-            "name": "wallets",
-            "type": "address[]"
-          },
-          {
-            "internalType": "string[]",
-            "name": "twitters",
-            "type": "string[]"
-          }
-        ],
-        "internalType": "struct MeemID",
-        "name": "",
-        "type": "tuple"
+        "internalType": "address",
+        "name": "lookupWalletAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "twitterHandleToRemove",
+        "type": "string"
       }
     ],
-    "stateMutability": "view",
+    "name": "removeTwitterHandleByWalletAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "twitterHandle",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "addressToRemove",
+        "type": "address"
+      }
+    ],
+    "name": "removeWalletAddressByTwitterHandle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "lookupWalletAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "addressToRemove",
+        "type": "address"
+      }
+    ],
+    "name": "removeWalletAddressByWalletAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]
