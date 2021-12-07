@@ -27,6 +27,7 @@
 		"lint:fix": "eslint --fix --ext=.ts,.tsx .",
 		"release": "semantic-release",
 		"size": "hardhat size-contracts",
+		"createABI": "tsnd --transpile-only scripts/createABI.ts",
 		"generateMeemTypes": "typechain --target ethers-v5  './types/Meem.json'"
 	},
 	"devDependencies": {
