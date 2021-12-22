@@ -10,32 +10,32 @@ import {TwitterAlreadyAdded, MeemIDNotFound, MeemIDAlreadyExists, MeemIDAlreadyA
 import {IMeemID, MeemID} from '../interfaces/IMeemID.sol';
 
 contract MeemIdFacet is IMeemID {
-	function createOrAddMeemID(address addy, string memory twitterHandle)
+	function createOrAddMeemID(address addy, string memory twitterId)
 		external
 		override
 	{
 		LibAppStorage.AppStorage storage s = LibAppStorage.diamondStorage();
 		LibAccessControl.requireRole(s.ID_VERIFIER_ROLE);
 		uint256 idx = s.walletIdIndex[addy];
-		uint256 twitterIdx = s.twitterIdIndex[twitterHandle];
+		uint256 twitterIdx = s.twitterIdIndex[twitterId];
 
 		if (idx == 0 && twitterIdx == 0) {
 			// Create the ID
 			address[] memory wallets = new address[](1);
 			string[] memory twitters = new string[](1);
 			wallets[0] = addy;
-			twitters[0] = twitterHandle;
+			twitters[0] = twitterId;
 
 			s.ids.push(MeemID({wallets: wallets, twitters: twitters}));
 
 			idx = s.ids.length - 1;
 
 			s.walletIdIndex[addy] = idx;
-			s.twitterIdIndex[twitterHandle] = idx;
+			s.twitterIdIndex[twitterId] = idx;
 		} else if (idx != 0 && twitterIdx == 0) {
 			// Add twitter
-			s.ids[idx].twitters.push(twitterHandle);
-			s.twitterIdIndex[twitterHandle] = idx;
+			s.ids[idx].twitters.push(twitterId);
+			s.twitterIdIndex[twitterId] = idx;
 		} else if (idx == 0 && twitterIdx != 0) {
 			// Add wallet
 			s.ids[twitterIdx].wallets.push(addy);
@@ -63,7 +63,7 @@ contract MeemIdFacet is IMeemID {
 		return s.ids[s.walletIdIndex[addy]];
 	}
 
-	function getMeemIDByTwitterHandle(string memory twitterHandle)
+	function getMeemIDByTwitterId(string memory twitterId)
 		external
 		view
 		override
@@ -71,11 +71,11 @@ contract MeemIdFacet is IMeemID {
 	{
 		LibAppStorage.AppStorage storage s = LibAppStorage.diamondStorage();
 
-		if (s.twitterIdIndex[twitterHandle] == 0) {
+		if (s.twitterIdIndex[twitterId] == 0) {
 			revert MeemIDNotFound();
 		}
 
-		return s.ids[s.twitterIdIndex[twitterHandle]];
+		return s.ids[s.twitterIdIndex[twitterId]];
 	}
 
 	function removeWalletAddressByWalletAddress(
@@ -107,14 +107,14 @@ contract MeemIdFacet is IMeemID {
 		}
 	}
 
-	function removeWalletAddressByTwitterHandle(
-		string memory lookupTwitterHandle,
+	function removeWalletAddressByTwitterId(
+		string memory lookupTwitterId,
 		address addressToRemove
 	) external override {
 		LibAppStorage.AppStorage storage s = LibAppStorage.diamondStorage();
 		LibAccessControl.requireRole(s.ID_VERIFIER_ROLE);
 
-		uint256 idx = s.twitterIdIndex[lookupTwitterHandle];
+		uint256 idx = s.twitterIdIndex[lookupTwitterId];
 
 		if (idx == 0) {
 			revert MeemIDNotFound();
@@ -132,9 +132,9 @@ contract MeemIdFacet is IMeemID {
 		}
 	}
 
-	function removeTwitterHandleByWalletAddress(
+	function removeTwitterIdByWalletAddress(
 		address lookupWalletAddress,
-		string memory twitterHandleToRemove
+		string memory twitterIdToRemove
 	) external override {
 		LibAppStorage.AppStorage storage s = LibAppStorage.diamondStorage();
 		LibAccessControl.requireRole(s.ID_VERIFIER_ROLE);
@@ -149,7 +149,7 @@ contract MeemIdFacet is IMeemID {
 			if (
 				LibStrings.compareStrings(
 					s.ids[idx].twitters[i],
-					twitterHandleToRemove
+					twitterIdToRemove
 				)
 			) {
 				s.ids[idx].twitters = LibArray.removeStringAt(
@@ -157,28 +157,23 @@ contract MeemIdFacet is IMeemID {
 					i
 				);
 
-				delete s.twitterIdIndex[twitterHandleToRemove];
+				delete s.twitterIdIndex[twitterIdToRemove];
 			}
 		}
 	}
 
-	function removeTwitterHandleByTwitterHandle(
-		string memory lookupTwitterHandle,
-		string memory twitterHandleToRemove
+	function removeTwitterIdByTwitterId(
+		string memory lookupTwitterId,
+		string memory twitterIdToRemove
 	) external override {
 		LibAppStorage.AppStorage storage s = LibAppStorage.diamondStorage();
 		LibAccessControl.requireRole(s.ID_VERIFIER_ROLE);
 
-		if (
-			LibStrings.compareStrings(
-				lookupTwitterHandle,
-				twitterHandleToRemove
-			)
-		) {
+		if (LibStrings.compareStrings(lookupTwitterId, twitterIdToRemove)) {
 			revert NoRemoveSelf();
 		}
 
-		uint256 idx = s.twitterIdIndex[lookupTwitterHandle];
+		uint256 idx = s.twitterIdIndex[lookupTwitterId];
 
 		if (idx == 0) {
 			revert MeemIDNotFound();
@@ -188,7 +183,7 @@ contract MeemIdFacet is IMeemID {
 			if (
 				LibStrings.compareStrings(
 					s.ids[idx].twitters[i],
-					twitterHandleToRemove
+					twitterIdToRemove
 				)
 			) {
 				s.ids[idx].twitters = LibArray.removeStringAt(
@@ -196,7 +191,7 @@ contract MeemIdFacet is IMeemID {
 					i
 				);
 
-				delete s.twitterIdIndex[twitterHandleToRemove];
+				delete s.twitterIdIndex[twitterIdToRemove];
 			}
 		}
 	}

@@ -8,7 +8,7 @@
       },
       {
         "internalType": "string",
-        "name": "twitterHandle",
+        "name": "twitterId",
         "type": "string"
       }
     ],
@@ -21,11 +21,11 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "twitterHandle",
+        "name": "twitterId",
         "type": "string"
       }
     ],
-    "name": "getMeemIDByTwitterHandle",
+    "name": "getMeemIDByTwitterId",
     "outputs": [
       {
         "components": [
@@ -83,16 +83,16 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "lookupTwitterHandle",
+        "name": "lookupTwitterId",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "twitterHandleToRemove",
+        "name": "twitterIdToRemove",
         "type": "string"
       }
     ],
-    "name": "removeTwitterHandleByTwitterHandle",
+    "name": "removeTwitterIdByTwitterId",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -106,11 +106,11 @@
       },
       {
         "internalType": "string",
-        "name": "twitterHandleToRemove",
+        "name": "twitterIdToRemove",
         "type": "string"
       }
     ],
-    "name": "removeTwitterHandleByWalletAddress",
+    "name": "removeTwitterIdByWalletAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -119,7 +119,7 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "twitterHandle",
+        "name": "twitterId",
         "type": "string"
       },
       {
@@ -128,7 +128,7 @@
         "type": "address"
       }
     ],
-    "name": "removeWalletAddressByTwitterHandle",
+    "name": "removeWalletAddressByTwitterId",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

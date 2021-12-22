@@ -50,7 +50,7 @@ describe('Meem ID', function Test() {
 	it('Can get ID by twitter handle', async () => {
 		const id = await meemIdFacet
 			.connect(signers[1])
-			.getMeemIDByTwitterHandle('signer2')
+			.getMeemIDByTwitterId('signer2')
 
 		assert.equal(id.wallets[0], signers[2].address)
 		assert.equal(id.twitters[0], 'signer2')
@@ -63,7 +63,7 @@ describe('Meem ID', function Test() {
 
 		const id = await meemIdFacet
 			.connect(signers[1])
-			.getMeemIDByTwitterHandle('signer2')
+			.getMeemIDByTwitterId('signer2')
 
 		assert.equal(id.wallets[0], signers[2].address)
 		assert.equal(id.wallets[1], signers[3].address)
@@ -76,7 +76,7 @@ describe('Meem ID', function Test() {
 			.createOrAddMeemID(signers[3].address, 'signer2-2')
 		const id = await meemIdFacet
 			.connect(signers[1])
-			.getMeemIDByTwitterHandle('signer2-2')
+			.getMeemIDByTwitterId('signer2-2')
 		assert.equal(id.wallets[0], signers[2].address)
 		assert.equal(id.wallets[1], signers[3].address)
 		assert.equal(id.twitters[0], 'signer2')
@@ -87,14 +87,14 @@ describe('Meem ID', function Test() {
 		await assert.isRejected(
 			meemIdFacet
 				.connect(signers[1])
-				.removeTwitterHandleByWalletAddress(signers[3].address, 'signer2-2')
+				.removeTwitterIdByWalletAddress(signers[3].address, 'signer2-2')
 		)
 	})
 
 	it('Can remove twitter handle by wallet', async () => {
 		await meemIdFacet
 			.connect(signers[0])
-			.removeTwitterHandleByWalletAddress(signers[3].address, 'signer2-2')
+			.removeTwitterIdByWalletAddress(signers[3].address, 'signer2-2')
 		const id = await meemIdFacet
 			.connect(signers[1])
 			.getMeemIDByWalletAddress(signers[3].address)
@@ -104,7 +104,7 @@ describe('Meem ID', function Test() {
 		assert.equal(id.twitters[0], 'signer2')
 
 		await assert.isRejected(
-			meemIdFacet.connect(signers[1]).getMeemIDByTwitterHandle('signer2-2')
+			meemIdFacet.connect(signers[1]).getMeemIDByTwitterId('signer2-2')
 		)
 	})
 
@@ -112,7 +112,7 @@ describe('Meem ID', function Test() {
 		await assert.isRejected(
 			meemIdFacet
 				.connect(signers[1])
-				.removeTwitterHandleByTwitterHandle('signer2', 'signer2-2')
+				.removeTwitterIdByTwitterId('signer2', 'signer2-2')
 		)
 	})
 
@@ -123,7 +123,7 @@ describe('Meem ID', function Test() {
 
 		await meemIdFacet
 			.connect(signers[0])
-			.removeTwitterHandleByTwitterHandle('signer2', 'signer2-2')
+			.removeTwitterIdByTwitterId('signer2', 'signer2-2')
 		const id = await meemIdFacet
 			.connect(signers[1])
 			.getMeemIDByWalletAddress(signers[3].address)
@@ -133,7 +133,7 @@ describe('Meem ID', function Test() {
 		assert.equal(id.twitters[0], 'signer2')
 
 		await assert.isRejected(
-			meemIdFacet.connect(signers[1]).getMeemIDByTwitterHandle('signer2-2')
+			meemIdFacet.connect(signers[1]).getMeemIDByTwitterId('signer2-2')
 		)
 	})
 
@@ -172,7 +172,7 @@ describe('Meem ID', function Test() {
 		await assert.isRejected(
 			meemIdFacet
 				.connect(signers[1])
-				.removeWalletAddressByTwitterHandle('signer2', signers[3].address)
+				.removeWalletAddressByTwitterId('signer2', signers[3].address)
 		)
 	})
 
@@ -183,7 +183,7 @@ describe('Meem ID', function Test() {
 
 		await meemIdFacet
 			.connect(signers[0])
-			.removeWalletAddressByTwitterHandle('signer2', signers[3].address)
+			.removeWalletAddressByTwitterId('signer2', signers[3].address)
 
 		const id = await meemIdFacet
 			.connect(signers[1])

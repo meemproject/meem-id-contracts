@@ -7,27 +7,26 @@ struct MeemID {
 }
 
 interface IMeemID {
-	function createOrAddMeemID(address addy, string memory twitterHandle)
-		external;
+	function createOrAddMeemID(address addy, string memory twitterId) external;
 
 	function removeWalletAddressByWalletAddress(
 		address lookupWalletAddress,
 		address addressToRemove
 	) external;
 
-	function removeWalletAddressByTwitterHandle(
-		string memory twitterHandle,
+	function removeWalletAddressByTwitterId(
+		string memory twitterId,
 		address addressToRemove
 	) external;
 
-	function removeTwitterHandleByWalletAddress(
+	function removeTwitterIdByWalletAddress(
 		address lookupWalletAddress,
-		string memory twitterHandleToRemove
+		string memory twitterIdToRemove
 	) external;
 
-	function removeTwitterHandleByTwitterHandle(
-		string memory lookupTwitterHandle,
-		string memory twitterHandleToRemove
+	function removeTwitterIdByTwitterId(
+		string memory lookupTwitterId,
+		string memory twitterIdToRemove
 	) external;
 
 	function getMeemIDByWalletAddress(address addy)
@@ -35,7 +34,7 @@ interface IMeemID {
 		view
 		returns (MeemID memory);
 
-	function getMeemIDByTwitterHandle(string memory twitterHandle)
+	function getMeemIDByTwitterId(string memory twitterId)
 		external
 		view
 		returns (MeemID memory);
