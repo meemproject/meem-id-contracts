@@ -45,6 +45,9 @@ describe('Meem ID', function Test() {
 
 		assert.equal(id.wallets[0], signers[2].address)
 		assert.equal(id.twitters[0], 'signer2')
+
+		assert.equal(id.defaultWallet, signers[2].address)
+		assert.equal(id.defaultTwitter, 'signer2')
 	})
 
 	it('Can get ID by twitter handle', async () => {
@@ -54,6 +57,8 @@ describe('Meem ID', function Test() {
 
 		assert.equal(id.wallets[0], signers[2].address)
 		assert.equal(id.twitters[0], 'signer2')
+		assert.equal(id.defaultWallet, signers[2].address)
+		assert.equal(id.defaultTwitter, 'signer2')
 	})
 
 	it('Can add wallet by twitter handle', async () => {
@@ -68,6 +73,9 @@ describe('Meem ID', function Test() {
 		assert.equal(id.wallets[0], signers[2].address)
 		assert.equal(id.wallets[1], signers[3].address)
 		assert.equal(id.twitters[0], 'signer2')
+
+		assert.equal(id.defaultWallet, signers[2].address)
+		assert.equal(id.defaultTwitter, 'signer2')
 	})
 
 	it('Can add twitter handle by wallet', async () => {
@@ -81,6 +89,9 @@ describe('Meem ID', function Test() {
 		assert.equal(id.wallets[1], signers[3].address)
 		assert.equal(id.twitters[0], 'signer2')
 		assert.equal(id.twitters[1], 'signer2-2')
+
+		assert.equal(id.defaultWallet, signers[2].address)
+		assert.equal(id.defaultTwitter, 'signer2')
 	})
 
 	it('Can not remove twitter handle by wallet as untrusted', async () => {

@@ -34,6 +34,13 @@ contract InitDiamond {
 		string[] memory twitters = new string[](0);
 		wallets[0] = address(0);
 
-		s.ids.push(MeemID({wallets: wallets, twitters: twitters}));
+		s.ids.push(
+			MeemID({
+				wallets: wallets,
+				twitters: twitters,
+				defaultWallet: address(0),
+				defaultTwitter: ''
+			})
+		);
 	}
 }

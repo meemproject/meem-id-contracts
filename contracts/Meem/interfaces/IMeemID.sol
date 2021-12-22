@@ -4,6 +4,8 @@ pragma solidity ^0.8.4;
 struct MeemID {
 	address[] wallets;
 	string[] twitters;
+	address defaultWallet;
+	string defaultTwitter;
 }
 
 interface IMeemID {

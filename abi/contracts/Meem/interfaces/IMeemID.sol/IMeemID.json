@@ -38,6 +38,16 @@
             "internalType": "string[]",
             "name": "twitters",
             "type": "string[]"
+          },
+          {
+            "internalType": "address",
+            "name": "defaultWallet",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "defaultTwitter",
+            "type": "string"
           }
         ],
         "internalType": "struct MeemID",
@@ -69,6 +79,16 @@
             "internalType": "string[]",
             "name": "twitters",
             "type": "string[]"
+          },
+          {
+            "internalType": "address",
+            "name": "defaultWallet",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "defaultTwitter",
+            "type": "string"
           }
         ],
         "internalType": "struct MeemID",

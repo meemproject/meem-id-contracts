@@ -26,7 +26,14 @@ contract MeemIdFacet is IMeemID {
 			wallets[0] = addy;
 			twitters[0] = twitterId;
 
-			s.ids.push(MeemID({wallets: wallets, twitters: twitters}));
+			s.ids.push(
+				MeemID({
+					wallets: wallets,
+					twitters: twitters,
+					defaultWallet: addy,
+					defaultTwitter: twitterId
+				})
+			);
 
 			idx = s.ids.length - 1;
 
@@ -36,10 +43,24 @@ contract MeemIdFacet is IMeemID {
 			// Add twitter
 			s.ids[idx].twitters.push(twitterId);
 			s.twitterIdIndex[twitterId] = idx;
+
+			if (bytes(s.ids[idx].defaultTwitter).length == 0) {
+				s.ids[idx].defaultTwitter = twitterId;
+			}
+			if (s.ids[idx].defaultWallet == address(0)) {
+				s.ids[idx].defaultWallet = addy;
+			}
 		} else if (idx == 0 && twitterIdx != 0) {
 			// Add wallet
 			s.ids[twitterIdx].wallets.push(addy);
 			s.walletIdIndex[addy] = twitterIdx;
+
+			if (bytes(s.ids[twitterIdx].defaultTwitter).length == 0) {
+				s.ids[twitterIdx].defaultTwitter = twitterId;
+			}
+			if (s.ids[twitterIdx].defaultWallet == address(0)) {
+				s.ids[twitterIdx].defaultWallet = addy;
+			}
 		} else if (idx != 0 && twitterIdx != 0 && idx != twitterIdx) {
 			// Mismatched ids
 			revert MeemIDAlreadyAssociated();
@@ -105,6 +126,10 @@ contract MeemIdFacet is IMeemID {
 				delete s.walletIdIndex[addressToRemove];
 			}
 		}
+
+		if (s.ids[idx].defaultWallet == addressToRemove) {
+			s.ids[idx].defaultWallet = s.ids[idx].wallets[0];
+		}
 	}
 
 	function removeWalletAddressByTwitterId(
@@ -129,6 +154,10 @@ contract MeemIdFacet is IMeemID {
 
 				delete s.walletIdIndex[addressToRemove];
 			}
+		}
+
+		if (s.ids[idx].defaultWallet == addressToRemove) {
+			s.ids[idx].defaultWallet = s.ids[idx].wallets[0];
 		}
 	}
 
@@ -159,6 +188,15 @@ contract MeemIdFacet is IMeemID {
 
 				delete s.twitterIdIndex[twitterIdToRemove];
 			}
+		}
+
+		if (
+			LibStrings.compareStrings(
+				s.ids[idx].defaultTwitter,
+				twitterIdToRemove
+			)
+		) {
+			s.ids[idx].defaultTwitter = s.ids[idx].twitters[0];
 		}
 	}
 
@@ -193,6 +231,15 @@ contract MeemIdFacet is IMeemID {
 
 				delete s.twitterIdIndex[twitterIdToRemove];
 			}
+		}
+
+		if (
+			LibStrings.compareStrings(
+				s.ids[idx].defaultTwitter,
+				twitterIdToRemove
+			)
+		) {
+			s.ids[idx].defaultTwitter = s.ids[idx].twitters[0];
 		}
 	}
 }
