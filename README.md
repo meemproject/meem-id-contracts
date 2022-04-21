@@ -1,3 +1,7 @@
+# DEPRECATED
+
+These contracts are now managed at: https://github.com/meemproject/meem-packages
+
 # Meem
 
 Join us in building the future of digital content where creators set the rules: [https://discord.gg/5NP8PYN8](https://discord.gg/5NP8PYN8)
